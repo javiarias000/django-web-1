@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}Portfolio - Stack & Education{% endblock %}
+
+{% block content %}
+<!-- Stack & Tools Section -->
+<section class="py-24 px-6 md:px-12 lg:px-40 max-w-[1400px] mx-auto">
+<div class="mb-16">
+<h2 class="text-xs uppercase tracking-[0.3em] text-primary font-bold mb-4">Expertise</h2>
+<h3 class="text-4xl md:text-5xl font-extrabold tracking-tight text-white">Stack &amp; Tools</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Frontend Card -->
+<div class="glass-card inner-glow p-8 rounded-xl flex flex-col gap-8 transition-all hover:border-primary/50 group">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-primary text-3xl">developer_mode_tv</span>
+<span class="text-[10px] font-bold tracking-widest text-slate-500 uppercase">01</span>
+</div>
+<div>
+<h4 class="text-xl font-bold text-white mb-2 tracking-wide uppercase">Frontend</h4>
+<p class="text-slate-400 text-sm leading-relaxed mb-6">Architecting performant, accessible, and high-fidelity user interfaces.</p>
+<div class="flex flex-wrap gap-2">
+{% for skill in stack_data.frontend %}
+<span class="px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-xs font-semibold rounded-full group-hover:bg-primary/20 transition-colors">{{ skill }}</span>
+{% endfor %}
+</div>
+</div>
+</div>
+<!-- Backend Card -->
+<div class="glass-card inner-glow p-8 rounded-xl flex flex-col gap-8 transition-all hover:border-primary/50 group">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-primary text-3xl">database</span>
+<span class="text-[10px] font-bold tracking-widest text-slate-500 uppercase">02</span>
+</div>
+<div>
+<h4 class="text-xl font-bold text-white mb-2 tracking-wide uppercase">Backend</h4>
+<p class="text-slate-400 text-sm leading-relaxed mb-6">Building scalable APIs and robust data architectures for modern apps.</p>
+<div class="flex flex-wrap gap-2">
+{% for skill in stack_data.backend %}
+<span class="px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-xs font-semibold rounded-full group-hover:bg-primary/20 transition-colors">{{ skill }}</span>
+{% endfor %}
+</div>
+</div>
+</div>
+<!-- Cloud/DevOps Card -->
+<div class="glass-card inner-glow p-8 rounded-xl flex flex-col gap-8 transition-all hover:border-primary/50 group">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-primary text-3xl">cloud_sync</span>
+<span class="text-[10px] font-bold tracking-widest text-slate-500 uppercase">03</span>
+</div>
+<div>
+<h4 class="text-xl font-bold text-white mb-2 tracking-wide uppercase">Infrastructure</h4>
+<p class="text-slate-400 text-sm leading-relaxed mb-6">Optimizing deployment pipelines and managing cloud resources.</p>
+<div class="flex flex-wrap gap-2">
+{% for skill in stack_data.infrastructure %}
+<span class="px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-xs font-semibold rounded-full group-hover:bg-primary/20 transition-colors">{{ skill }}</span>
+{% endfor %}
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Education & Courses Section -->
+<section class="py-24 px-6 md:px-12 lg:px-40 max-w-[1400px] mx-auto bg-slate-900/20">
+<div class="mb-16 text-center">
+<h2 class="text-xs uppercase tracking-[0.3em] text-primary font-bold mb-4">Background</h2>
+<h3 class="text-4xl md:text-5xl font-extrabold tracking-tight text-white">Education &amp; Courses</h3>
+</div>
+<div class="relative max-w-4xl mx-auto">
+<!-- Central Line -->
+<div class="absolute left-[20px] md:left-1/2 top-0 bottom-0 w-[1px] bg-slate-800 -translate-x-1/2"></div>
+<!-- Timeline Item 1 -->
+<div class="relative mb-16 flex flex-col md:flex-row items-start md:items-center">
+<div class="absolute left-[20px] md:left-1/2 -translate-x-1/2 w-3 h-3 bg-primary rounded-full shadow-[0_0_15px_rgba(0,122,184,0.6)] z-10 border-4 border-background-dark"></div>
+<div class="w-full md:w-1/2 pl-12 md:pl-0 md:pr-16 md:text-right order-2 md:order-1">
+<span class="text-primary font-bold text-sm">2023</span>
+<h4 class="text-xl font-bold text-white mt-1">AWS Certified Developer</h4>
+<p class="text-slate-400">Amazon Web Services • Associate</p>
+</div>
+<div class="hidden md:block w-1/2 order-3"></div>
+</div>
+<!-- Timeline Item 2 -->
+<div class="relative mb-16 flex flex-col md:flex-row items-start md:items-center">
+<div class="absolute left-[20px] md:left-1/2 -translate-x-1/2 w-3 h-3 bg-primary rounded-full shadow-[0_0_15px_rgba(0,122,184,0.6)] z-10 border-4 border-background-dark"></div>
+<div class="hidden md:block w-1/2 order-1"></div>
+<div class="w-full md:w-1/2 pl-12 md:pl-16 order-2">
+<span class="text-primary font-bold text-sm">2018 — 2022</span>
+<h4 class="text-xl font-bold text-white mt-1">B.S. in Computer Science</h4>
+<p class="text-slate-400">Stanford University • GPA 3.9/4.0</p>
+<p class="text-xs text-slate-500 mt-2">Specialization in Human-Computer Interaction &amp; Systems.</p>
+</div>
+</div>
+<!-- Timeline Item 3 -->
+<div class="relative mb-16 flex flex-col md:flex-row items-start md:items-center">
+<div class="absolute left-[20px] md:left-1/2 -translate-x-1/2 w-3 h-3 bg-primary rounded-full shadow-[0_0_15px_rgba(0,122,184,0.6)] z-10 border-4 border-background-dark"></div>
+<div class="w-full md:w-1/2 pl-12 md:pl-0 md:pr-16 md:text-right order-2 md:order-1">
+<span class="text-primary font-bold text-sm">2022</span>
+<h4 class="text-xl font-bold text-white mt-1">Google UX Design Certificate</h4>
+<p class="text-slate-400">Coursera • Professional Certificate</p>
+</div>
+<div class="hidden md:block w-1/2 order-3"></div>
+</div>
+<!-- Timeline Item 4 -->
+<div class="relative flex flex-col md:flex-row items-start md:items-center">
+<div class="absolute left-[20px] md:left-1/2 -translate-x-1/2 w-3 h-3 bg-primary rounded-full shadow-[0_0_15px_rgba(0,122,184,0.6)] z-10 border-4 border-background-dark"></div>
+<div class="hidden md:block w-1/2 order-1"></div>
+<div class="w-full md:w-1/2 pl-12 md:pl-16 order-2">
+<span class="text-primary font-bold text-sm">2021</span>
+<h4 class="text-xl font-bold text-white mt-1">Advanced Frontend Engineering</h4>
+<p class="text-slate-400">Frontend Masters • Full Stack Course</p>
+</div>
+</div>
+</div>
+</section>
+{% endblock content %}

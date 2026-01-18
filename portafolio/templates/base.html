@@ -1,0 +1,147 @@
+{% load i18n %}
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>{% block title %}Default Title{% endblock %}</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {primary: "#607AFB", "emerald-glow": "#00bd9d", charcoal: "#0a0a0a", "surface-dark": "#121212", "border-dark": "#262626", "background-light": "#f5f6f8", "background-dark": "#0f1323"}, fontFamily: {display: "Space Grotesk"}, borderRadius: {DEFAULT: "0.5rem", lg: "1rem", xl: "1.5rem", full: "9999px"}}}};</script>
+<style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply bg-charcoal text-slate-200 font-display selection:bg-primary/30;
+            }
+        }
+        .glass-nav {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid #262626;
+        }
+        .glowing-border {
+            position: relative;
+        }
+        .glowing-border::after {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            background: linear-gradient(45deg, transparent, #00bd9d, transparent);
+            z-index: -1;
+            border-radius: inherit;
+            opacity: 0.3;
+        }
+        .tech-box {
+            @apply flex flex-col items-center justify-center p-8 rounded-2xl border border-border-dark bg-surface-dark transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_20px_-5px_rgba(0,189,157,0.3)];
+        }
+        .radar-grid {
+            background-image: radial-gradient(circle, #262626 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        .scanning-line {
+            background: linear-gradient(to bottom, transparent, #00bd9d44, transparent);
+            height: 100px;
+            width: 100%;
+            position: absolute;
+            top: -100px;
+        }
+        .neomorphic-card {
+            background: rgba(18, 18, 18, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3), -2px -2px 10px rgba(255, 255, 255, 0.02);
+        }
+        .radar-circle {
+            border: 1px solid rgba(0, 189, 157, 0.1);
+        }
+        .data-dot {
+            box-shadow: 0 0 15px #00bd9d;
+        }
+    </style>
+</head>
+<body>
+<nav class="fixed top-0 w-full z-50 glass-nav">
+<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-9 bg-primary/10 border border-primary/20 rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl font-bold">terminal</span>
+</div>
+<span class="text-xl font-bold tracking-tight text-white uppercase">PyArchitect<span class="text-primary">.</span>io</span>
+</div>
+<div class="hidden md:flex items-center gap-10">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="{% url 'home' %}">Architecture</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="{% url 'education' %}">Education</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Ecosystem</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Open Source</a>
+<div class="h-4 w-px bg-border-dark"></div>
+<form action="{% url 'set_language' %}" method="post" class="flex items-center gap-2 bg-surface-dark border border-border-dark p-1 rounded-full">
+    {% csrf_token %}
+    <input name="next" type="hidden" value="{{ request.path }}">
+    <button type="submit" name="language" value="en" class="px-3 py-1 text-xs font-bold rounded-full {% if request.LANGUAGE_CODE == 'en' %}bg-primary text-charcoal{% else %}hover:text-white text-slate-500{% endif %} transition-colors">EN</button>
+    <button type="submit" name="language" value="es" class="px-3 py-1 text-xs font-bold rounded-full {% if request.LANGUAGE_CODE == 'es' %}bg-primary text-charcoal{% else %}hover:text-white text-slate-500{% endif %} transition-colors">ES</button>
+</form>
+<button class="bg-white text-charcoal hover:bg-slate-200 px-5 py-2 rounded-lg text-sm font-bold transition-all">
+                Contact
+            </button>
+</div>
+<div class="md:hidden">
+<span class="material-symbols-outlined">menu</span>
+</div>
+</div>
+</nav>
+<main class="pt-20">
+{% block content %}
+{% endblock content %}
+</main>
+<footer class="border-t border-border-dark py-16 px-6 mt-32 bg-surface-dark">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+<div class="max-w-sm">
+<div class="flex items-center gap-3 mb-6">
+<div class="size-8 bg-primary/10 border border-primary/20 rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl">terminal</span>
+</div>
+<span class="text-lg font-bold tracking-tight text-white uppercase">PyArchitect</span>
+</div>
+<p class="text-slate-500 text-sm leading-relaxed mb-6">
+                Building the backbone of modern digital enterprises through robust engineering and elegant backend design.
+            </p>
+<div class="flex gap-4">
+<a class="size-10 rounded-full bg-border-dark/30 flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-xl">alternate_email</span>
+</a>
+<a class="size-10 rounded-full bg-border-dark/30 flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-xl">hub</span>
+</a>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-20">
+<div>
+<h5 class="text-white font-bold mb-6">Sitemap</h5>
+<ul class="space-y-4 text-sm text-slate-500">
+<li><a class="hover:text-primary transition-colors" href="#">Architecture</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Projects</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Articles</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Contact</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-white font-bold mb-6">Connect</h5>
+<ul class="space-y-4 text-sm text-slate-500">
+<li><a class="hover:text-primary transition-colors" href="#">LinkedIn</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">GitHub</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">X / Twitter</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">StackOverflow</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-border-dark flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-slate-600 font-bold uppercase tracking-widest">
+<span>© 2024 Backend Architect Portfolio. All rights reserved.</span>
+<div class="flex gap-6">
+<a class="hover:text-slate-400" href="#">Privacy Policy</a>
+<a class="hover:text-slate-400" href="#">Terms of Service</a>
+</div>
+</div>
+</footer>
+</body></html>

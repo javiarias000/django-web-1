@@ -1,0 +1,358 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}Senior Django Architect | Backend Portfolio{% endblock %}
+
+{% block content %}
+<section class="relative min-h-[90vh] flex items-center justify-center px-6 overflow-hidden">
+<div class="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px] -z-10"></div>
+<div class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-emerald-glow/5 rounded-full blur-[140px] -z-10"></div>
+<div class="max-w-5xl text-center">
+<div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-surface-dark border border-border-dark text-slate-300 text-xs font-semibold mb-8 tracking-wide">
+<span class="relative flex h-2 w-2">
+<span class="absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+                Available for architecture consultation
+            </div>
+<h1 class="text-5xl md:text-8xl font-bold leading-[1.05] mb-8 tracking-tight">
+                Architecting Scalable <br/>
+<span class="text-primary italic">Backend</span> Solutions
+            </h1>
+<p class="text-lg md:text-xl text-slate-400 font-normal max-w-3xl mx-auto mb-12 leading-relaxed">
+                Senior Python &amp; Django Developer specializing in high-concurrency systems, microservices orchestration, and robust API design for enterprise ecosystems.
+            </p>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-5">
+<button class="w-full sm:w-auto px-8 py-4 bg-primary text-charcoal font-bold rounded-xl hover:scale-105 transition-all shadow-lg shadow-primary/10 flex items-center justify-center gap-2">
+                    View Architecture Portfolio
+                    <span class="material-symbols-outlined text-sm">arrow_outward</span>
+</button>
+<button class="w-full sm:w-auto px-8 py-4 bg-surface-dark border border-border-dark text-white font-bold rounded-xl hover:border-primary/50 transition-all">
+                    System Design Docs
+                </button>
+</div>
+</div>
+</section>
+<section class="max-w-7xl mx-auto px-6 py-32 relative">
+<div class="flex flex-col lg:flex-row gap-16 items-center">
+<div class="w-full lg:w-1/2">
+<h2 class="text-sm uppercase tracking-[0.3em] text-primary font-bold mb-4">Technical Distribution</h2>
+<h3 class="text-4xl md:text-5xl font-bold mb-8">Language Intelligence</h3>
+<p class="text-slate-400 text-lg mb-12 max-w-lg">
+                    A multi-dimensional view of core language proficiency and system utilization across the current production architecture.
+                </p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<div class="neomorphic-card p-8 rounded-3xl">
+<div class="text-slate-500 text-xs font-bold uppercase tracking-widest mb-2">Total Commits</div>
+<div class="text-3xl font-bold text-white mb-1">{{ total_commits }}</div>
+<div class="text-primary text-xs font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span> 
+                            +{{ oss_contributions }} Contributions
+                        </div>
+</div>
+<div class="neomorphic-card p-8 rounded-3xl">
+<div class="text-slate-500 text-xs font-bold uppercase tracking-widest mb-2">Years Exp.</div>
+<div class="text-3xl font-bold text-white mb-1">{{ years_exp }}</div>
+<div class="text-slate-400 text-xs font-medium">System Uptime: {{ system_uptime }}</div>
+</div>
+</div>
+</div>
+<div class="w-full lg:w-1/2 relative flex justify-center">
+<div class="relative w-full aspect-[4/3] max-w-lg radar-grid border border-border-dark rounded-3xl overflow-hidden flex items-center justify-center">
+<div class="scanning-line opacity-40"></div>
+<div class="absolute radar-circle w-[80%] aspect-square rounded-full"></div>
+<div class="absolute radar-circle w-[60%] aspect-square rounded-full"></div>
+<div class="absolute radar-circle w-[40%] aspect-square rounded-full"></div>
+<div class="absolute radar-circle w-[20%] aspect-square rounded-full"></div>
+<div class="absolute w-full h-[1px] bg-white/5"></div>
+<div class="absolute h-full w-[1px] bg-white/5"></div>
+{% for lang_data in radar_languages %}
+<div class="absolute group" style="top: {{ lang_data.top }}; left: {{ lang_data.left }}; transform: translate(-50%, -50%);">
+<div class="data-dot {{ lang_data.size }} bg-primary rounded-full"></div>
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 px-3 py-1.5 bg-black/80 backdrop-blur-xl border border-primary/40 rounded-lg text-[10px] font-bold text-white whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                            {{ lang_data.lang|upper }}: {{ lang_data.percentage|floatformat:"0" }}%
+                        </div>
+<div class="absolute top-5 left-1/2 -translate-x-1/2 text-[10px] text-slate-500 font-bold tracking-widest uppercase">{{ lang_data.lang }}</div>
+</div>
+{% endfor %}
+<div class="size-1.5 bg-primary rounded-full"></div>
+</div>
+</div>
+</div>
+</section>
+<section class="max-w-7xl mx-auto px-6 py-24 bg-surface-dark/30 rounded-[3rem] border border-border-dark">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+<div class="max-w-2xl">
+<h2 class="text-sm uppercase tracking-[0.3em] text-primary font-bold mb-4">{% trans "Proyectos" %}</h2>
+<h3 class="text-4xl md:text-5xl font-bold mb-6">{% trans "Arquitecturas Backend" %}</h3>
+<p class="text-slate-400 text-lg">{% trans "Análisis detallado de desafíos técnicos y soluciones a nivel de sistema implementadas en entornos de alta carga." %}</p>
+</div>
+<div class="flex gap-3">
+<button id="carousel-prev" class="size-12 rounded-full border border-border-dark flex items-center justify-center hover:border-primary transition-colors">
+<span class="material-symbols-outlined">west</span>
+</button>
+<button id="carousel-next" class="size-12 rounded-full border border-border-dark flex items-center justify-center hover:border-primary transition-colors text-primary">
+<span class="material-symbols-outlined">east</span>
+</button>
+</div>
+</div>
+<div class="px-4"> {# New wrapper for carousel with horizontal padding #}
+<div id="projects-carousel" class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 gap-6 no-scrollbar">
+{% for project in projects %}
+<div class="group bg-surface-dark border border-border-dark rounded-3xl overflow-hidden hover:border-primary/30 transition-all duration-500 flex-none w-[90%] md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] snap-center shrink-0 carousel-item">
+<div class="aspect-[16/9] relative overflow-hidden">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style="background-image: url('{{ project.image_url|default:'https://via.placeholder.com/600x338?text=Project+Image' }}');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-charcoal via-transparent to-transparent"></div>
+<div class="absolute top-3 left-3 flex gap-1"> {# Reduced padding and gap #}
+<span class="px-2 py-1 bg-black/60 backdrop-blur-md border border-white/10 rounded-full text-[9px] font-bold text-white flex items-center gap-0.5"> {# Reduced font size and padding #}
+<span class="material-symbols-outlined text-xs text-yellow-500">star</span> {{ project.stargazers_count|floatformat:"0" }}
+                        </span>
+<span class="px-2 py-1 bg-black/60 backdrop-blur-md border border-white/10 rounded-full text-[9px] font-bold text-white flex items-center gap-0.5"> {# Reduced font size and padding #}
+<span class="material-symbols-outlined text-xs text-blue-400">account_tree</span> {{ project.forks_count|floatformat:"0" }}
+                        </span>
+</div>
+</div>
+<div class="p-6"> {# Reduced padding #}
+<div class="flex justify-between items-center mb-4"> {# Reduced margin-bottom #}
+<h4 class="text-xl font-bold">{{ project.name }}</h4> {# Reduced font size #}
+<span class="text-[9px] text-slate-500 font-medium">Updated {{ project.updated_at|timesince }} ago</span> {# Reduced font size #}
+</div>
+<div class="space-y-4 mb-8"> {# Reduced space-y and margin-bottom #}
+<div>
+<p class="text-[9px] uppercase tracking-widest text-primary font-bold mb-1">{% trans "Technical Problem" %}</p> {# Reduced font size and margin-bottom #}
+<p class="text-xs text-slate-400 leading-relaxed">{{ project.description }}</p> {# Reduced font size #}
+</div>
+<div>
+<p class="text-[9px] uppercase tracking-widest text-emerald-glow font-bold mb-1">{% trans "Implementation" %}</p> {# Reduced font size and margin-bottom #}
+<p class="text-xs text-slate-400 leading-relaxed">Placeholder for implementation details.</p> {# TODO: Add actual implementation details to project object #}
+</div>
+</div>
+<div class="flex flex-wrap gap-1 mb-8"> {# Reduced gap and margin-bottom #}
+{% for lang in project.languages %}
+<span class="px-3 py-0.5 bg-border-dark/50 text-slate-300 text-[9px] font-bold rounded-lg border border-border-dark uppercase tracking-tighter">{{ lang }}</span> {# Reduced font size and padding #}
+{% endfor %}
+</div>
+<div class="flex gap-2"> {# Reduced gap #}
+<button class="flex-1 bg-white text-charcoal py-3 rounded-xl text-sm font-bold flex items-center justify-center gap-1 hover:bg-slate-200 transition-colors"> {# Reduced padding and gap #}
+                            Architecture Specs
+                        </button>
+<a href="{{ project.html_url }}" target="_blank" class="flex-1 border border-border-dark text-slate-300 py-3 rounded-xl text-sm font-bold hover:bg-border-dark transition-colors flex items-center justify-center gap-1"> {# Reduced padding and gap #}
+<span class="material-symbols-outlined text-base">code</span> View Repo
+                        </a>
+</div>
+</div>
+</div>
+{% endfor %}
+</div>
+</div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const carousel = document.getElementById('projects-carousel');
+        const prevButton = document.getElementById('carousel-prev');
+        const nextButton = document.getElementById('carousel-next');
+        let autoScrollInterval;
+        const scrollIntervalTime = 5000; // 5 seconds
+        let itemWidth; // Will be calculated dynamically
+
+        if (!carousel || !prevButton || !nextButton) {
+            console.error('Carousel elements not found.');
+            return;
+        }
+
+        const items = Array.from(carousel.children);
+        if (items.length === 0) {
+            console.warn('No carousel items found.');
+            return;
+        }
+
+        // Clone items for infinite loop effect
+        const numToClone = items.length; // Clone all items to ensure continuous loop
+        for (let i = 0; i < numToClone; i++) {
+            carousel.appendChild(items[i].cloneNode(true)); // Clone from start, append to end
+        }
+        for (let i = 0; i < numToClone; i++) {
+            carousel.prepend(items[items.length - 1 - i].cloneNode(true)); // Clone from end, prepend to start
+        }
+
+        // Recalculate itemWidth after cloning as carousel.children will have changed
+        const allClonedItems = Array.from(carousel.children);
+        itemWidth = allClonedItems[numToClone].offsetWidth + parseInt(getComputedStyle(carousel).gap);
+
+        // Adjust scroll position after cloning to start at the first "real" item
+        carousel.scrollLeft = numToClone * itemWidth;
+
+
+        function startAutoScroll() {
+            stopAutoScroll(); // Clear any existing interval
+            autoScrollInterval = setInterval(() => {
+                carousel.scrollBy({
+                    left: itemWidth, // Scroll by one item width
+                    behavior: 'smooth'
+                });
+            }, scrollIntervalTime);
+        }
+
+        function stopAutoScroll() {
+            clearInterval(autoScrollInterval);
+        }
+
+        function handleInfiniteScroll() {
+            // If scrolling right and hit the cloned start items at the end
+            // Use Math.ceil to account for potential sub-pixel scrolling
+            if (Math.ceil(carousel.scrollLeft) >= (carousel.scrollWidth - (numToClone * itemWidth))) {
+                carousel.scrollLeft = numToClone * itemWidth; // Jump to the real start
+                carousel.style.scrollBehavior = 'auto'; // Disable smooth scroll for instant jump
+                setTimeout(() => {
+                    carousel.style.scrollBehavior = 'smooth'; // Re-enable smooth scroll
+                }, 50); // Small delay to ensure styles are applied
+            }
+            // If scrolling left and hit the cloned end items at the beginning
+            else if (carousel.scrollLeft <= 0) {
+                carousel.scrollLeft = carousel.scrollWidth - (numToClone * itemWidth * 2); // Jump to the real end
+                carousel.style.scrollBehavior = 'auto'; // Disable smooth scroll for instant jump
+                setTimeout(() => {
+                    carousel.style.scrollBehavior = 'smooth'; // Re-enable smooth scroll
+                }, 50); // Small delay to ensure styles are applied
+            }
+        }
+
+        // Initial start of auto-scroll
+        startAutoScroll();
+
+        // Pause on hover
+        carousel.addEventListener('mouseover', stopAutoScroll);
+        carousel.addEventListener('mouseleave', startAutoScroll);
+
+        // Manual navigation - now always keeps auto-scroll running
+        prevButton.addEventListener('click', () => {
+            carousel.scrollBy({
+                left: -itemWidth, // Scroll by one item width
+                behavior: 'smooth'
+            });
+        });
+
+        nextButton.addEventListener('click', () => {
+            carousel.scrollBy({
+                left: itemWidth, // Scroll by one item width
+                behavior: 'smooth'
+            });
+        });
+
+        // Add event listener for scroll to handle infinite looping jumps
+        carousel.addEventListener('scroll', handleInfiniteScroll);
+    });
+</script>
+</section>
+
+<!-- Stack & Tools Section -->
+<section class="py-24 px-6 md:px-12 lg:px-40 max-w-[1400px] mx-auto">
+<div class="mb-16">
+<h2 class="text-xs uppercase tracking-[0.3em] text-primary font-bold mb-4">Expertise</h2>
+<h3 class="text-4xl md:text-5xl font-extrabold tracking-tight text-white">Stack &amp; Tools</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Frontend Card -->
+<div class="glass-card inner-glow p-8 rounded-xl flex flex-col gap-8 transition-all hover:border-primary/50 group">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-primary text-3xl">developer_mode_tv</span>
+<span class="text-[10px] font-bold tracking-widest text-slate-500 uppercase">01</span>
+</div>
+<div>
+<h4 class="text-xl font-bold text-white mb-2 tracking-wide uppercase">Frontend</h4>
+<p class="text-slate-400 text-sm leading-relaxed mb-6">Architecting performant, accessible, and high-fidelity user interfaces.</p>
+<div class="flex flex-wrap gap-2">
+{% for skill in stack_data.frontend %}
+<span class="px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-xs font-semibold rounded-full group-hover:bg-primary/20 transition-colors">{{ skill }}</span>
+{% endfor %}
+</div>
+</div>
+</div>
+<!-- Backend Card -->
+<div class="glass-card inner-glow p-8 rounded-xl flex flex-col gap-8 transition-all hover:border-primary/50 group">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-primary text-3xl">database</span>
+<span class="text-[10px] font-bold tracking-widest text-slate-500 uppercase">02</span>
+</div>
+<div>
+<h4 class="text-xl font-bold text-white mb-2 tracking-wide uppercase">Backend</h4>
+<p class="text-slate-400 text-sm leading-relaxed mb-6">Building scalable APIs and robust data architectures for modern apps.</p>
+<div class="flex flex-wrap gap-2">
+{% for skill in stack_data.backend %}
+<span class="px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-xs font-semibold rounded-full group-hover:bg-primary/20 transition-colors">{{ skill }}</span>
+{% endfor %}
+</div>
+</div>
+</div>
+<!-- Cloud/DevOps Card -->
+<div class="glass-card inner-glow p-8 rounded-xl flex flex-col gap-8 transition-all hover:border-primary/50 group">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-primary text-3xl">cloud_sync</span>
+<span class="text-[10px] font-bold tracking-widest text-slate-500 uppercase">03</span>
+</div>
+<div>
+<h4 class="text-xl font-bold text-white mb-2 tracking-wide uppercase">Infrastructure</h4>
+<p class="text-slate-400 text-sm leading-relaxed mb-6">Optimizing deployment pipelines and managing cloud resources.</p>
+<div class="flex flex-wrap gap-2">
+{% for skill in stack_data.infrastructure %}
+<span class="px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-xs font-semibold rounded-full group-hover:bg-primary/20 transition-colors">{{ skill }}</span>
+{% endfor %}
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Education & Courses Section -->
+<section class="py-24 px-6 md:px-12 lg:px-40 max-w-[1400px] mx-auto bg-slate-900/20">
+<div class="mb-16 text-center">
+<h2 class="text-xs uppercase tracking-[0.3em] text-primary font-bold mb-4">Background</h2>
+<h3 class="text-4xl md:text-5xl font-extrabold tracking-tight text-white">Education &amp; Courses</h3>
+</div>
+<div class="relative max-w-4xl mx-auto">
+<!-- Central Line -->
+<div class="absolute left-[20px] md:left-1/2 top-0 bottom-0 w-[1px] bg-slate-800 -translate-x-1/2"></div>
+<!-- Timeline Item 1 -->
+<div class="relative mb-16 flex flex-col md:flex-row items-start md:items-center">
+<div class="absolute left-[20px] md:left-1/2 -translate-x-1/2 w-3 h-3 bg-primary rounded-full shadow-[0_0_15px_rgba(0,122,184,0.6)] z-10 border-4 border-background-dark"></div>
+<div class="w-full md:w-1/2 pl-12 md:pl-0 md:pr-16 md:text-right order-2 md:order-1">
+<span class="text-primary font-bold text-sm">2023</span>
+<h4 class="text-xl font-bold text-white mt-1">AWS Certified Developer</h4>
+<p class="text-slate-400">Amazon Web Services • Associate</p>
+</div>
+<div class="hidden md:block w-1/2 order-3"></div>
+</div>
+<!-- Timeline Item 2 -->
+<div class="relative mb-16 flex flex-col md:flex-row items-start md:items-center">
+<div class="absolute left-[20px] md:left-1/2 -translate-x-1/2 w-3 h-3 bg-primary rounded-full shadow-[0_0_15px_rgba(0,122,184,0.6)] z-10 border-4 border-background-dark"></div>
+<div class="hidden md:block w-1/2 order-1"></div>
+<div class="w-full md:w-1/2 pl-12 md:pl-16 order-2">
+<span class="text-primary font-bold text-sm">2018 — 2022</span>
+<h4 class="text-xl font-bold text-white mt-1">B.S. in Computer Science</h4>
+<p class="text-slate-400">Stanford University • GPA 3.9/4.0</p>
+<p class="text-xs text-slate-500 mt-2">Specialization in Human-Computer Interaction &amp; Systems.</p>
+</div>
+</div>
+<!-- Timeline Item 3 -->
+<div class="relative mb-16 flex flex-col md:flex-row items-start md:items-center">
+<div class="absolute left-[20px] md:left-1/2 -translate-x-1/2 w-3 h-3 bg-primary rounded-full shadow-[0_0_15px_rgba(0,122,184,0.6)] z-10 border-4 border-background-dark"></div>
+<div class="w-full md:w-1/2 pl-12 md:pl-0 md:pr-16 md:text-right order-2 md:order-1">
+<span class="text-primary font-bold text-sm">2022</span>
+<h4 class="text-xl font-bold text-white mt-1">Google UX Design Certificate</h4>
+<p class="text-slate-400">Coursera • Professional Certificate</p>
+</div>
+<div class="hidden md:block w-1/2 order-3"></div>
+</div>
+<!-- Timeline Item 4 -->
+<div class="relative flex flex-col md:flex-row items-start md:items-center">
+<div class="absolute left-[20px] md::left-1/2 -translate-x-1/2 w-3 h-3 bg-primary rounded-full shadow-[0_0_15px_rgba(0,122,184,0.6)] z-10 border-4 border-background-dark"></div>
+<div class="hidden md:block w-1/2 order-1"></div>
+<div class="w-full md:w-1/2 pl-12 md:pl-16 order-2">
+<span class="text-primary font-bold text-sm">2021</span>
+<h4 class="text-xl font-bold text-white mt-1">Advanced Frontend Engineering</h4>
+<p class="text-slate-400">Frontend Masters • Full Stack Course</p>
+</div>
+</div>
+</div>
+</section>
+
+{% endblock content %}
