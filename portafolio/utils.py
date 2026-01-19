@@ -87,73 +87,13 @@ def _fetch_repository_topics(owner, repo):
 
 def _categorize_stack_data(languages, topics):
     """
-    Categorizes languages and topics into Frontend, Backend, Infrastructure.
-    This is a preliminary categorization and can be refined.
+    Categorizes languages and topics into Frontend, Backend, Infrastructure
+    based on a hardcoded list provided by the user.
     """
-    frontend_skills = set()
-    backend_skills = set()
-    infra_skills = set()
+    frontend_skills = {"HTML", "CSS", "JavaScript"}
+    backend_skills = {"Python", "Django", "PHP", "Databases", "GraphQL"} # Adding GraphQL to Backend as it's often API-related
+    infra_skills = {"Bash", "Cyber Security"} # Bash for scripting and infrastructure tasks
     
-    # User-provided specific technologies to look for (from previous turn)
-    user_technologies_map = {
-        "django": "backend",
-        "html": "frontend",
-        "php": "backend",
-        "css": "frontend",
-        "bash": "infra",
-        "python": "backend",
-        "data science": "backend" # Categorizing data science as backend as it's typically server-side
-    }
-
-    # Process languages
-    for lang, bytes_of_code in languages.items():
-        lower_lang = lang.lower()
-        if lower_lang == "html" or lower_lang == "css" or lower_lang == "javascript" or lower_lang == "typescript":
-            frontend_skills.add(lang)
-        elif lower_lang == "python" and bytes_of_code > 0: # Consider Python for backend if it's actually used
-            backend_skills.add(lang)
-        elif lower_lang == "php" and bytes_of_code > 0:
-            backend_skills.add(lang)
-        elif lower_lang in ["shell", "bash"] and bytes_of_code > 0:
-            infra_skills.add(lang)
-        
-    # Process topics
-    for topic in topics:
-        lower_topic = topic.lower()
-        if lower_topic in ["react", "nextjs", "tailwind", "framer-motion", "redux"]:
-            frontend_skills.add(topic)
-        elif lower_topic in ["graphql", "postgresql", "prisma", "redis", "fastify", "django", "python"]:
-            backend_skills.add(topic)
-        elif lower_topic in ["aws", "vercel", "docker", "kubernetes", "ci-cd", "terraform"]:
-            infra_skills.add(topic)
-        # Handle "data science" related topics
-        if lower_topic in ["data-science", "machine-learning"]:
-            backend_skills.add("Data Science") # Add "Data Science" directly
-    
-    # Add user-specified technologies explicitly if not already added by languages/topics
-    for tech, category in user_technologies_map.items():
-        tech_found = False
-        if category == "frontend":
-            if tech.lower() in [s.lower() for s in frontend_skills]:
-                tech_found = True
-            else:
-                frontend_skills.add(tech.replace("_", " ").title()) # Add it if not already present
-        elif category == "backend":
-            if tech.lower() in [s.lower() for s in backend_skills]:
-                tech_found = True
-            else:
-                backend_skills.add(tech.replace("_", " ").title())
-        elif category == "infra":
-            if tech.lower() in [s.lower() for s in infra_skills]:
-                tech_found = True
-            else:
-                infra_skills.add(tech.replace("_", " ").title())
-
-    # Filter out empty strings that might have been added
-    frontend_skills = {s for s in frontend_skills if s}
-    backend_skills = {s for s in backend_skills if s}
-    infra_skills = {s for s in infra_skills if s}
-
     return {
         "frontend": sorted(list(frontend_skills)),
         "backend": sorted(list(backend_skills)),

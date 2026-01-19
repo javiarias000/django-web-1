@@ -17,11 +17,9 @@ This is a dynamic and interactive personal portfolio website built with Django a
 *   **Dedicated Education Section:** Page detailing academic background and technical stack.
 
 ## Technologies Used
-*   **Backend:** Python, Django 4.1
-*   **Frontend:** HTML, CSS (Tailwind CSS), JavaScript
-*   **APIs:** GitHub API
-*   **Database:** SQLite (default for development)
-*   **Deployment:** (Flexible, e.g., Vercel, Heroku, AWS)
+*   **Backend:** Python, Django
+*   **Frontend:** HTML, CSS, JavaScript
+*   **Other:** Bash, GraphQL, Databases
 
 ## Setup and Installation
 
