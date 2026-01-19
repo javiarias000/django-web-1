@@ -19,6 +19,7 @@ This is a dynamic and interactive personal portfolio website built with Django a
 ## Technologies Used
 *   **Backend:** Python, Django
 *   **Frontend:** HTML, CSS, JavaScript
+*   **Containerization:** Docker
 *   **Other:** Bash, GraphQL, Databases
 
 ## Setup and Installation
