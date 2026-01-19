@@ -58,6 +58,11 @@ def home(request):
         
         context['oss_contributions'] = f"{total_forks}+"
 
+        # Manually add 'Bash', 'Ethical Hacking', and 'Docker' to the distribution
+        language_distribution['Bash'] = language_distribution.get('Bash', 0) + 1
+        language_distribution['Ethical Hacking'] = language_distribution.get('Ethical Hacking', 0) + 1
+        language_distribution['Docker'] = language_distribution.get('Docker', 0) + 1
+
         # Calculate percentages for language distribution
         total_projects_with_language = sum(language_distribution.values())
         if total_projects_with_language > 0:
@@ -69,20 +74,26 @@ def home(request):
         
         # Prepare language data for radar chart with calculated positions
         radar_languages = []
-        max_languages_on_radar = 5 # Limit to top N languages for visual clarity
+        max_languages_on_radar = 8 # Limit to top N languages for visual clarity
         
         # Define the center and max radius of the radar (adjust as needed)
         center_x, center_y = 50, 50 # Percentage relative to parent
-        max_radar_radius = 40 # Percentage relative to parent, max distance from center
+        max_radar_radius = 48 # Percentage relative to parent, max distance from center
+        min_radar_radius = 10 # Minimum distance from center for any language
         
         for i, (lang, percentage) in enumerate(sorted_languages[:max_languages_on_radar]):
             # Calculate angle for even distribution
             angle_degrees = (i / max_languages_on_radar) * 360
+            
+            # Special adjustment for Ethical Hacking to separate it
+            if lang == 'Ethical Hacking':
+                angle_degrees += 15 # Add an offset to its angle
+            
             angle_radians = math.radians(angle_degrees)
             
             # Scale radius based on percentage (e.g., 20% to 100% of max_radar_radius)
-            # Min percentage on radar should result in a small radius, max in max_radar_radius
-            scaled_radius = (percentage / 100) * max_radar_radius
+            # Ensure a minimum radius even for low percentages
+            scaled_radius = min_radar_radius + (percentage / 100) * (max_radar_radius - min_radar_radius)
             
             # Calculate top and left positions
             top_pos = center_y + scaled_radius * math.sin(angle_radians)

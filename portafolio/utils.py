@@ -92,7 +92,7 @@ def _categorize_stack_data(languages, topics):
     """
     frontend_skills = {"HTML", "CSS", "JavaScript"}
     backend_skills = {"Python", "Django", "PHP", "Databases", "GraphQL"} # Adding GraphQL to Backend as it's often API-related
-    infra_skills = {"Bash", "Cyber Security"} # Bash for scripting and infrastructure tasks
+    infra_skills = {"Bash", "Cyber Security", "Docker"} # Bash for scripting and infrastructure tasks
     
     return {
         "frontend": sorted(list(frontend_skills)),
